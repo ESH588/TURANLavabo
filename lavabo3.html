@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>GeneraWash - Her Yaşa Uygun Banyo Çözümleri</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #d4af37;
+            --bg-soft: #f0fdf4;
+            --bg-white: #ffffff;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --card-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            background-color: var(--bg-soft);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* NAVBAR */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: var(--bg-white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: clamp(15px, 3vw, 30px);
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--accent-color);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            z-index: 999;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav a {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* HERO */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: clamp(40px, 8vw, 80px) 5%;
+            min-height: clamp(600px, 70vh, 80vh);
+            background: linear-gradient(135deg, #ffffff 0%, #e8f5e9 100%);
+            position: relative;
+            overflow: hidden;
+            gap: 30px;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 0;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            word-wrap: break-word;
+        }
+
+        .hero-text p {
+            font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+            color: var(--text-light);
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: float 6s ease-in-out infinite;
+            min-width: 0;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            object-fit: cover;
+        }
+
+        .btn {
+            padding: clamp(12px, 3vw, 15px) clamp(25px, 5vw, 35px);
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* SECTION TITLE */
+        .section-title {
+            text-align: center;
+            margin-bottom: clamp(30px, 5vw, 50px);
+        }
+
+        .section-title h2 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+        }
+
+        /* ÖZELLİKLER */
+        .features {
+            padding: clamp(40px, 6vw, 60px) 5%;
+            text-align: center;
+            background: var(--bg-white);
+        }
+
+        .features h2 {
+            margin-bottom: 40px;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: clamp(20px, 3vw, 30px);
+        }
+
+        .feature-card {
+            padding: clamp(20px, 4vw, 30px);
+            border-radius: 15px;
+            background: var(--bg-soft);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .feature-icon {
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            margin-bottom: 15px;
+            display: block;
+            color: var(--accent-color);
+        }
+
+        .feature-card h3 {
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            color: var(--text-light);
+        }
+
+        /* GALERİ */
+        .gallery-section {
+            padding: clamp(40px, 8vw, 80px) 5%;
+            background: var(--bg-soft);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: clamp(15px, 3vw, 25px);
+        }
+
+        .gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            cursor: pointer;
+            transition: var(--transition);
+            aspect-ratio: 4/3;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: clamp(15px, 3vw, 20px);
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h3 {
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            margin-bottom: 5px;
+        }
+
+        .gallery-overlay p {
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            opacity: 0.9;
+        }
+
+        /* ÜRÜN KARTLARI */
+        .products-section {
+            padding: clamp(40px, 8vw, 80px) 5%;
+            background: white;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: clamp(20px, 3vw, 30px);
+        }
+
+        .product-card {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            background: white;
+            position: relative;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        .product-img-container {
+            height: clamp(180px, 25vw, 280px);
+            background: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .product-img-container img {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s;
+            object-fit: cover;
+        }
+
+        .product-card:hover .product-img-container img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: clamp(18px, 2.5vw, 25px);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-title {
+            font-size: clamp(1rem, 2.5vw, 1.15rem);
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .product-desc {
+            font-size: clamp(0.8rem, 1.8vw, 0.88rem);
+            color: var(--text-light);
+            margin-bottom: 12px;
+            flex-grow: 1;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 15px;
+            font-size: clamp(0.78rem, 1.8vw, 0.85rem);
+            color: var(--text-light);
+        }
+
+        .product-features li {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .product-features i {
+            color: var(--accent-color);
+            margin-right: 8px;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .price {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .contact-btn {
+            flex: 1;
+            padding: clamp(8px, 2vw, 12px);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: clamp(0.78rem, 1.8vw, 0.9rem);
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+        }
+
+        .whatsapp-btn:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        .phone-btn {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .phone-btn:hover {
+            background: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* HAKKIMIZDA */
+        .about-section {
+            padding: clamp(40px, 8vw, 80px) 5%;
+            background: var(--bg-soft);
+            display: flex;
+            align-items: center;
+            gap: clamp(30px, 5vw, 50px);
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            object-fit: cover;
+        }
+
+        .about-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .about-content h2 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .about-content p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.8;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        /* İLETİŞİM */
+        .contact-section {
+            padding: clamp(40px, 8vw, 80px) 5%;
+            background: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: clamp(20px, 3vw, 30px);
+            margin-top: 40px;
+        }
+
+        .contact-card {
+            text-align: center;
+            padding: clamp(20px, 4vw, 30px);
+            background: var(--bg-soft);
+            border-radius: 15px;
+            transition: var(--transition);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .contact-card i {
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .contact-card h3 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+        }
+
+        .contact-card p {
+            color: var(--text-light);
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            padding: clamp(40px, 6vw, 60px) 5% 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: clamp(30px, 4vw, 40px);
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .footer-section p {
+            color: #bdc3c7;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            text-align: center;
+            color: #95a5a6;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+        }
+
+        /* ANİMASYONLAR */
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* ======================== */
+        /* RESPONSIVE BREAKPOINTS   */
+        /* ======================== */
+
+        /* LAPTOP VE BÜYÜK EKRANLAR (1440px+) */
+        @media (min-width: 1441px) {
+            .feature-grid { grid-template-columns: repeat(4, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(4, 1fr); }
+            .product-grid { grid-template-columns: repeat(4, 1fr); }
+            .contact-grid { grid-template-columns: repeat(4, 1fr); }
+            .footer-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        /* DESKTOP (1025px - 1440px) */
+        @media (min-width: 1025px) and (max-width: 1440px) {
+            .feature-grid { grid-template-columns: repeat(4, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(4, 1fr); }
+            .product-grid { grid-template-columns: repeat(4, 1fr); }
+            .contact-grid { grid-template-columns: repeat(4, 1fr); }
+            .footer-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        /* TABLET - LANDSCAPE / NEST HUB (768px - 1024px) */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .feature-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .product-grid { grid-template-columns: repeat(2, 1fr); }
+            .contact-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* KATLANABİLİR TELEFONLAR - GALAXY Z FOLD (768px genişlik, ama mobil görünüm) */
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 30px;
+                min-height: auto;
+            }
+
+            .hero-text {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+
+            .hero-text p {
+                max-width: 100%;
+            }
+
+            .hero-image {
+                width: 100%;
+            }
+
+            .btn-container {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                margin-right: 0;
+            }
+
+            .about-section {
+                flex-direction: column;
+            }
+
+            .feature-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .product-grid { grid-template-columns: repeat(2, 1fr); }
+            .contact-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* MOBİL TELEFONLAR - BÜYÜK (426px - 767px) */
+        @media (min-width: 426px) and (max-width: 767px) {
+            .feature-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .product-grid { grid-template-columns: repeat(2, 1fr); }
+            .contact-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* MOBİL TELEFONLAR - KÜÇÜK (376px - 425px) */
+        @media (min-width: 376px) and (max-width: 425px) {
+            .feature-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .product-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ÇOK KÜÇÜK EKRANLAR (320px - 375px) */
+        @media (max-width: 375px) {
+            html {
+                font-size: 14px;
+            }
+
+            nav {
+                padding: 10px 4%;
+                height: 60px;
+            }
+
+            .hero {
+                padding: 20px 4%;
+            }
+
+            .feature-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .product-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+
+        /* YATAY MOD (LANDSCAPE) MOBİL */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero {
+                min-height: auto;
+                padding: 30px 5%;
+            }
+
+            .hero-text h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-image img {
+                max-height: 250px;
+            }
+
+            nav {
+                height: 60px;
+            }
+
+            .product-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* RETINA EKRANLAR */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .product-img-container img,
+            .hero-image img,
+            .gallery-item img {
+                image-rendering: -webkit-optimize-contrast;
+                image-rendering: crisp-edges;
+            }
+        }
+
+        /* ERİŞİLEBİLİRLİK */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* PRINT */
+        @media print {
+            nav, .btn, .contact-buttons, footer {
+                display: none;
+            }
+
+            body {
+                background: white;
+                color: black;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">Genera<span>Wash</span></div>
+        <div class="nav-links">
+            <a href="#home" class="nav-link active">Ana Sayfa</a>
+            <a href="#gallery" class="nav-link">Galeri</a>
+            <a href="#products" class="nav-link">Ürünler</a>
+            <a href="#about" class="nav-link">Hakkımızda</a>
+            <a href="#contact" class="nav-link">İletişim</a>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- MOBİL MENÜ -->
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#home" class="nav-link" onclick="closeMobileMenu()">Ana Sayfa</a>
+        <a href="#gallery" class="nav-link" onclick="closeMobileMenu()">Galeri</a>
+        <a href="#products" class="nav-link" onclick="closeMobileMenu()">Ürünler</a>
+        <a href="#about" class="nav-link" onclick="closeMobileMenu()">Hakkımızda</a>
+        <a href="#contact" class="nav-link" onclick="closeMobileMenu()">İletişim</a>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-text">
+            <h1>Banyoda Herkes İçin <br><span style="color:var(--accent-color)">Konfor ve Güvenlik</span></h1>
+            <p>Çocuklarınızın boyuna uygun alçak lavabo ve yaşlılarımızın rahatı için tasarlanmış ergonomik yüksek lavabo. Tek ünitede iki nesil bir arada.</p>
+            <div class="btn-container">
+                <a href="#products" class="btn">Ürünleri İncele</a>
+                <a href="#contact" class="btn btn-outline">Bize Ulaşın</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://picsum.photos/536/400" alt="GeneraWash Lavabo">
+        </div>
+    </section>
+
+    <!-- ÖZELLİKLER -->
+    <section class="features">
+        <h2>Neden GeneraWash?</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <span class="feature-icon"><i class="fas fa-baby"></i></span>
+                <h3>Çocuk Dostu</h3>
+                <p>Küçük lavabomuz çocuklarınızın tek başına el yıkamasına olanak tanır, özgüvenlerini artırır.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon"><i class="fas fa-wheelchair"></i></span>
+                <h3>Erişilebilir Tasarım</h3>
+                <p>Yüksek lavabo kısmı, tekerlekli sandalye kullanıcıları ve yaşlı bireyler için ideal yüksekliktedir.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon"><i class="fas fa-gem"></i></span>
+                <h3>Modern Estetik</h3>
+                <p>Mermer desenler, altın ve krom detaylarla banyonuzun havasını değiştirir.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon"><i class="fas fa-shield-alt"></i></span>
+                <h3>Güvenli Malzeme</h3>
+                <p>Anti-bakteriyel ve kolay temizlenebilir yüzeyler ile hijyenik kullanım.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERİ BÖLÜMÜ -->
+    <section class="gallery-section" id="gallery">
+        <div class="section-title">
+            <h2>Galeri</h2>
+            <p>Ürünlerimizi yakından keşfedin</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://picsum.photos/537/354" alt="Galeri 1">
+                <div class="gallery-overlay">
+                    <h3>Gri & Altın Serisi</h3>
+                    <p>Modern ve şık tasarım</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/538/354" alt="Galeri 2">
+                <div class="gallery-overlay">
+                    <h3>Siyah Mermer</h3>
+                    <p>Lüks ve asil duruş</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/539/354" alt="Galeri 3">
+                <div class="gallery-overlay">
+                    <h3>Beyaz & Siyah</h3>
+                    <p>Temiz ve ferah çizgiler</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/540/354" alt="Galeri 4">
+                <div class="gallery-overlay">
+                    <h3>Mint Yeşili</h3>
+                    <p>Doğal ve huzurlu</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/541/354" alt="Galeri 5">
+                <div class="gallery-overlay">
+                    <h3>Krom Detaylı</h3>
+                    <p>Şık ve modern</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/542/354" alt="Galeri 6">
+                <div class="gallery-overlay">
+                    <h3>LED Aynalı</h3>
+                    <p>Fonksiyonel tasarım</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/543/354" alt="Galeri 7">
+                <div class="gallery-overlay">
+                    <h3>Özel Seri</h3>
+                    <p>Benzersiz detaylar</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/544/354" alt="Galeri 8">
+                <div class="gallery-overlay">
+                    <h3>Komple Set</h3>
+                    <p>Tam çözüm paketi</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ÜRÜN KARTLARI - 4 ADET -->
+    <section class="products-section" id="products">
+        <div class="section-title">
+            <h2>Popüler Modellerimiz</h2>
+            <p>Sipariş için hemen arayın veya WhatsApp'tan mesaj atın</p>
+        </div>
+        <div class="product-grid">
+
+            <!-- Ürün Kartı 1 -->
+            <div class="product-card">
+                <span class="badge">En Çok Satan</span>
+                <div class="product-img-container">
+                    <img src="https://picsum.photos/545/354" alt="Gri Lavabo">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">GeneraWash - Gri & Gold</div>
+                    <p class="product-desc">Çift seviyeli aksesuarlı, altın musluklu özel tasarım.</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> Çocuk ve yetişkin lavabosu</li>
+                        <li><i class="fas fa-check"></i> Altın kaplama musluklar</li>
+                        <li><i class="fas fa-check"></i> LED aydınlatmalı ayna</li>
+                        <li><i class="fas fa-check"></i> Su itici kaplama</li>
+                    </ul>
+                    <div class="price-row">
+                        <span class="price">₺12.990</span>
+                    </div>
+                    <div class="contact-buttons">
+                        <a href="https://wa.me/905551234567?text=GeneraWash%20Gri%20Gold%20modeli%20hakkında%20bilgi%20almak%20istiyorum" class="contact-btn whatsapp-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="tel:+905551234567" class="contact-btn phone-btn">
+                            <i class="fas fa-phone"></i> Ara
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ürün Kartı 2 -->
+            <div class="product-card">
+                <span class="badge">Yeni</span>
+                <div class="product-img-container">
+                    <img src="https://picsum.photos/546/354" alt="Siyah Lavabo">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">GeneraWash - Noir Black</div>
+                    <p class="product-desc">Siyah mermer desenli gövde, krom detaylar.</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> Siyah mermer desen</li>
+                        <li><i class="fas fa-check"></i> Krom musluklar</li>
+                        <li><i class="fas fa-check"></i> Dokunmatik ayna</li>
+                        <li><i class="fas fa-check"></i> Anti-bakteriyel yüzey</li>
+                    </ul>
+                    <div class="price-row">
+                        <span class="price">₺14.500</span>
+                    </div>
+                    <div class="contact-buttons">
+                        <a href="https://wa.me/905551234567?text=GeneraWash%20Noir%20Black%20modeli%20hakkında%20bilgi%20almak%20istiyorum" class="contact-btn whatsapp-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="tel:+905551234567" class="contact-btn phone-btn">
+                            <i class="fas fa-phone"></i> Ara
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ürün Kartı 3 -->
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="https://picsum.photos/547/354" alt="Beyaz Lavabo">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">GeneraWash - Pure White</div>
+                    <p class="product-desc">Klasik beyaz gövde, siyah mat musluklar.</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> Saf beyaz renk</li>
+                        <li><i class="fas fa-check"></i> Siyah mat musluklar</li>
+                        <li><i class="fas fa-check"></i> Yuvarlak LED ayna</li>
+                        <li><i class="fas fa-check"></i> Kolay temizlik</li>
+                    </ul>
+                    <div class="price-row">
+                        <span class="price">₺11.250</span>
+                    </div>
+                    <div class="contact-buttons">
+                        <a href="https://wa.me/905551234567?text=GeneraWash%20Pure%20White%20modeli%20hakkında%20bilgi%20almak%20istiyorum" class="contact-btn whatsapp-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="tel:+905551234567" class="contact-btn phone-btn">
+                            <i class="fas fa-phone"></i> Ara
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ürün Kartı 4 - YENİ -->
+            <div class="product-card">
+                <span class="badge">Özel Seri</span>
+                <div class="product-img-container">
+                    <img src="https://picsum.photos/548/354" alt="Mint Lavabo">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">GeneraWash - Mint Green</div>
+                    <p class="product-desc">Doğal mint yeşili gövde, altın detaylarla özel tasarım.</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> Mint yeşili özel renk</li>
+                        <li><i class="fas fa-check"></i> Altın detay musluklar</li>
+                        <li><i class="fas fa-check"></i> Yansıtıcı LED ayna</li>
+                        <li><i class="fas fa-check"></i> Nem dayanıklı yüzey</li>
+                    </ul>
+                    <div class="price-row">
+                        <span class="price">₺13.750</span>
+                    </div>
+                    <div class="contact-buttons">
+                        <a href="https://wa.me/905551234567?text=GeneraWash%20Mint%20Green%20modeli%20hakkında%20bilgi%20almak%20istiyorum" class="contact-btn whatsapp-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="tel:+905551234567" class="contact-btn phone-btn">
+                            <i class="fas fa-phone"></i> Ara
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- HAKKIMIZDA -->
+    <section class="about-section" id="about">
+        <div class="about-image">
+            <img src="https://picsum.photos/549/400" alt="Hakkımızda">
+        </div>
+        <div class="about-content">
+            <h2>Hakkımızda</h2>
+            <p>GeneraWash olarak, her yaşa uygun banyo çözümleri üretiyoruz. Çocuklarınızın ve yaşlılarınızın rahatı için özel olarak tasarladığımız çift seviyeli lavabo sistemleri ile banyolarınızı daha güvenli ve kullanışlı hale getiriyoruz.</p>
+            <p>2015 yılından beri sürdürülebilir, estetik ve fonksiyonel tasarımlarımızla binlerce mutlu müşteriye ulaştık. Ürünlerimizde kaliteli malzeme ve işçiliği ön planda tutuyor, her detayda konforu düşünüyoruz.</p>
+            <a href="#contact" class="btn">Daha Fazla Bilgi</a>
+        </div>
+    </section>
+
+    <!-- İLETİŞİM -->
+    <section class="contact-section" id="contact">
+        <div class="section-title">
+            <h2>Bize Ulaşın</h2>
+            <p>Sorularınız için bize ulaşabilirsiniz</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <i class="fas fa-phone-alt"></i>
+                <h3>Telefon</h3>
+                <p>+90 555 123 45 67</p>
+                <p>+90 212 345 67 89</p>
+            </div>
+            <div class="contact-card">
+                <i class="fas fa-envelope"></i>
+                <h3>E-posta</h3>
+                <p>info@generawash.com</p>
+                <p>satis@generawash.com</p>
+            </div>
+            <div class="contact-card">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Adres</h3>
+                <p>Mobilyacılar Sitesi</p>
+                <p>İstanbul, Türkiye</p>
+            </div>
+            <div class="contact-card">
+                <i class="fas fa-clock"></i>
+                <h3>Çalışma Saatleri</h3>
+                <p>Pazartesi - Cuma: 09:00 - 18:00</p>
+                <p>Cumartesi: 10:00 - 16:00</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h3>GeneraWash</h3>
+                <p>Her yaşa uygun, güvenli ve estetik banyo çözümleri. Çocuklarınız ve yaşlılarınız için özel tasarlanmış lavabo sistemleri.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Hızlı Linkler</h3>
+                <ul>
+                    <li><a href="#home">Ana Sayfa</a></li>
+                    <li><a href="#gallery">Galeri</a></li>
+                    <li><a href="#products">Ürünlerimiz</a></li>
+                    <li><a href="#about">Hakkımızda</a></li>
+                    <li><a href="#contact">İletişim</a></li>
+                    <li><a href="#">Gizlilik Politikası</a></li>
+                    <li><a href="#">Kullanım Koşulları</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Ürün Kategorileri</h3>
+                <ul>
+                    <li><a href="#">Çift Seviyeli Lavabolar</a></li>
+                    <li><a href="#">Erişilebilir Banyo Çözümleri</a></li>
+                    <li><a href="#">Çocuk Lavaboları</a></li>
+                    <li><a href="#">Yaşlı Dostu Ürünler</a></li>
+                    <li><a href="#">LED Aynalar</a></li>
+                    <li><a href="#">Banyo Aksesuarları</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>İletişim Bilgileri</h3>
+                <p><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Mobilyacılar Sitesi, İstanbul</p>
+                <p><i class="fas fa-phone" style="margin-right: 10px;"></i> +90 555 123 45 67</p>
+                <p><i class="fas fa-envelope" style="margin-right: 10px;"></i> info@generawash.com</p>
+                <p style="margin-top: 15px;"><strong>WhatsApp Destek Hattı:</strong><br>+90 555 123 45 67</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 GeneraWash. Tüm hakları saklıdır. | Her Yaşa Uygun Banyo Çözümleri</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobil Menü Kontrolü
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileNav = document.getElementById('mobileNav');
+
+        mobileMenu.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            const icon = mobileMenu.querySelector('i');
+            if (mobileNav.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        function closeMobileMenu() {
+            mobileNav.classList.remove('active');
+            const icon = mobileMenu.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+
+        // Scroll Spy - Aktif Menü Öğesini Güncelle
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function updateActiveNav() {
+            let current = '';
+            const scrollPos = window.scrollY + 150;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+
+                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav);
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navHeight = document.querySelector('nav').offsetHeight;
+                    const targetPosition = target.offsetTop - navHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Scroll animasyonları
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.product-card, .feature-card, .contact-card, .gallery-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Sayfa yüklenme animasyonu
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
